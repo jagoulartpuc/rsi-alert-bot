@@ -19,14 +19,15 @@ async def main():
         for asset in assets[:100]:
             try:
                 rsi = calculator.calculate(asset)
+                #print(rsi, asset)
                 if rsi < 33:
                     message = "Alert: " + asset + " RSI is lower than 33!"
                     print(message)
                     await bot.send_message(chat_id='-829755881', text=message)
-                await asyncio.sleep(60)
             except requests.exceptions.ReadTimeout:
                 print("Connection timeout, retrying in 5 seconds")
                 time.sleep(5)
                 continue
+        await asyncio.sleep(60)
 
 asyncio.run(main())
